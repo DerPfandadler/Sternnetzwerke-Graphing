@@ -50,12 +50,6 @@ jobs:
           name: build-artifacts-${{ matrix.os }}
           path: ./dist/*
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
       - name: Create and push tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -64,6 +58,10 @@ jobs:
           git tag $TAG_NAME
           git push origin $TAG_NAME
 
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/download-artifact@v3
         with:
           name: build-artifacts-ubuntu-latest
