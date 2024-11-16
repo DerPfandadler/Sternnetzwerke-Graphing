@@ -50,7 +50,7 @@ jobs:
           name: build-artifacts-${{ matrix.os }}
           path: ./dist/*
 
-  tag-and-release:
+  release:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -61,7 +61,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TAG_NAME="v0.1.$(date +%s)"
+          TAG_NAME="v1.0.$(date +%s)"
           git tag $TAG_NAME
           git push origin $TAG_NAME
 
