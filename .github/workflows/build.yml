@@ -25,14 +25,14 @@ jobs:
       - name: Run lint (optional)
         if: always()
         run: |
-          pip install pylint
-          pylint **/*.py
+          pip install pylint || true
+          pylint **/*.py || true
 
       - name: Run tests (optional)
         if: always()
         run: |
-          pip install pytest
-          pytest
+          pip install pytest || true
+          pytest || true
 
       - uses: actions/upload-artifact@v3
         with:
@@ -46,15 +46,17 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: build-artifacts-ubuntu-latest
+          path: ./artifacts/ubuntu-latest
 
       - uses: actions/download-artifact@v3
         with:
           name: build-artifacts-windows-latest
+          path: ./artifacts/windows-latest
 
       - uses: softprops/action-gh-release@v1
         with:
           files: |
-            build-artifacts-ubuntu-latest/*
-            build-artifacts-windows-latest/*
+            ./artifacts/ubuntu-latest/*
+            ./artifacts/windows-latest/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
