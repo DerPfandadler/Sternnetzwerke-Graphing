@@ -3,9 +3,6 @@ name: Build Application
 on:
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -53,19 +50,20 @@ jobs:
           name: build-artifacts-${{ matrix.os }}
           path: ./dist/*
 
-  release:
+  tag-and-release:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Create a tag
+      - name: Create and push tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag v1.0.${{ github.run_number }}
-          git push origin v1.0.${{ github.run_number }}
+          TAG_NAME="v0.1.$(date +%s)"
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
 
       - uses: actions/download-artifact@v3
         with:
