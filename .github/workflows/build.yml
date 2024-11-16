@@ -18,14 +18,16 @@ jobs:
           python-version: '3.9'
 
       - run: |
-          pip install --upgrade pip pyinstaller
+          python -m pip install --upgrade pip
+          pip install pyinstaller
           pip install -r requirements.txt
           pyinstaller --onefile __init__.py
         shell: bash
         if: runner.os != 'Windows'
 
       - run: |
-          pip install --upgrade pip pyinstaller
+          python -m pip install --upgrade pip
+          pip install pyinstaller
           pip install -r requirements.txt
           pyinstaller --onefile __init__.py
         shell: powershell
@@ -34,13 +36,13 @@ jobs:
       - name: Run lint (optional)
         if: always()
         run: |
-          pip install pylint || true
+          python -m pip install pylint || true
           pylint **/*.py || true
 
       - name: Run tests (optional)
         if: always()
         run: |
-          pip install pytest || true
+          python -m pip install pytest || true
           pytest || true
 
       - uses: actions/upload-artifact@v3
