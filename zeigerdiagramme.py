@@ -174,6 +174,7 @@ class ZeigerDiagram:
         # Ursprünglichen Index wiederherstellen
         self.current_index = original_index
 
+        # Zeige das Diagramm
         plt.show()
 
 # Erstelle eine Instanz von ZeigerDiagram und initialisiere das erste Diagramm

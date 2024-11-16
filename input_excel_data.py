@@ -21,19 +21,24 @@ def load_data_from_excel(file_path):
 
     # Daten aus den verschiedenen Blättern laden
     currents_df = pd.read_excel(xls, 'Currents')
-    currents = currents_df.iloc[:, 1:].T.values.tolist()
+    currents_df = currents_df.iloc[:, 1:].astype('float64').fillna(0.0)  # Ersetze NaN durch 0.0 und setze Typ auf float64
+    currents = currents_df.T.values.tolist()
 
     angles_df = pd.read_excel(xls, 'Current Angles')
-    angles = angles_df.iloc[:, 1:].T.values.tolist()
+    angles_df = angles_df.iloc[:, 1:].astype('float64').fillna(0.0)  # Ersetze NaN durch 0.0 und setze Typ auf float64
+    angles = angles_df.T.values.tolist()
 
     unn_values_df = pd.read_excel(xls, 'UNN')
-    unn_values = unn_values_df.iloc[0, 1:].tolist()
+    unn_values_df = unn_values_df.iloc[0, 1:].astype('float64').fillna(0.0)  # Ersetze NaN durch 0.0 und setze Typ auf float64
+    unn_values = unn_values_df.tolist()
 
     voltages_df = pd.read_excel(xls, 'Voltages')
-    voltages = voltages_df.iloc[:, 1:].T.values.tolist()
+    voltages_df = voltages_df.iloc[:, 1:].astype('float64').fillna(0.0)  # Ersetze NaN durch 0.0 und setze Typ auf float64
+    voltages = voltages_df.T.values.tolist()
 
     inn_values_df = pd.read_excel(xls, 'INN')
-    inn_values = inn_values_df.iloc[0, 1:].tolist()
+    inn_values_df = inn_values_df.iloc[0, 1:].astype('float64').fillna(0.0)  # Ersetze NaN durch 0.0 und setze Typ auf float64
+    inn_values = inn_values_df.tolist()
 
     # Daten in ein Dictionary packen
     data = {
