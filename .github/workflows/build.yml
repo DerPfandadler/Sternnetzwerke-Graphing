@@ -18,11 +18,21 @@ jobs:
           python-version: '3.9'
 
       - run: |
-          pip install --upgrade pip pylint pytest pyinstaller
+          pip install --upgrade pip pyinstaller
           pip install -r requirements.txt
-          pylint **/*.py
-          pytest
           pyinstaller --onefile __init__.py
+
+      - name: Run lint (optional)
+        if: always()
+        run: |
+          pip install pylint
+          pylint **/*.py
+
+      - name: Run tests (optional)
+        if: always()
+        run: |
+          pip install pytest
+          pytest
 
       - uses: actions/upload-artifact@v3
         with:
