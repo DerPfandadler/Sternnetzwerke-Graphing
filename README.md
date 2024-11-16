@@ -1,7 +1,3 @@
-Hier ist das aktualisierte README mit der GPLv3-Lizenz:
-
----
-
 # Sternnetzwerke Graphing
 
 Ein Python-Projekt zur Visualisierung von Sternnetzwerken (Sternschaltung) und deren Berechnungen mithilfe von Zeigerdiagrammen. Es ermöglicht die Eingabe von Daten aus einer Excel-Datei, das Zeichnen von Diagrammen und die Berechnung von Sternpunktverschiebungen und weiteren relevanten elektrischen Parametern.
