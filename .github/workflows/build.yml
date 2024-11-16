@@ -29,20 +29,21 @@ jobs:
       - name: Run linting
         run: |
           pip install pylint
-          pylint scripts/
+          pylint **/*.py
 
       - name: Run tests
         run: |
           pip install pytest
           pytest
 
-      - name: Build Application
+      - name: Build Executable
         run: |
-          python main.py
+          pip install pyinstaller
+          pyinstaller --onefile __init__.py
 
       - name: Archive build artifacts
         if: success()
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
-          path: ./output/
+          path: ./dist/
