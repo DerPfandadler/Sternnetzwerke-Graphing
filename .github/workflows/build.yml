@@ -54,7 +54,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TAG_NAME="v1.0.$(date +%s)"
+          if ($env:RUNNER_OS -eq "Windows") {
+            $TAG_NAME = "v1.0.$((Get-Date -UFormat %s))"
+          } else {
+            $TAG_NAME = "v1.0.$(date +%s)"
+          }
           git tag $TAG_NAME
           git push origin $TAG_NAME
 
