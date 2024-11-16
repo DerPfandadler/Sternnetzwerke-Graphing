@@ -21,6 +21,15 @@ jobs:
           pip install --upgrade pip pyinstaller
           pip install -r requirements.txt
           pyinstaller --onefile __init__.py
+        shell: bash
+        if: runner.os != 'Windows'
+
+      - run: |
+          pip install --upgrade pip pyinstaller
+          pip install -r requirements.txt
+          pyinstaller --onefile __init__.py
+        shell: powershell
+        if: runner.os == 'Windows'
 
       - name: Run lint (optional)
         if: always()
